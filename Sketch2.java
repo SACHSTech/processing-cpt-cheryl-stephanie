@@ -2,13 +2,14 @@ import processing.core.PApplet;
 
 public class Sketch2 extends PApplet {
 	
-	
+	//Stephanie's Sketch2.java
+
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(800, 500);
   }
 
   /** 
