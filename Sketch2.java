@@ -1,12 +1,18 @@
 import processing.core.PApplet;
+import processing.core.PImage; // import the PImage library
+
+//Stephanie's Sketch2.java
 
 public class Sketch2 extends PApplet {
+
+  PImage imgSpace;
+	PImage imgRocket;
 	
-	//Stephanie's Sketch2.java
 
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
+
   public void settings() {
 	// put your size call here
     size(800, 500);
@@ -17,7 +23,15 @@ public class Sketch2 extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+    
+    // load images
+    imgSpace = loadImage("Pics/BackgroundMenuscreen.jpg");
+    imgRocket = loadImage("Pics/rocket.png");
+
+    imgSpace.resize(imgSpace.width, imgSpace.height); //resize Space
+
+    imgRocket.resize(imgRocket.width*2, imgRocket.height*2); //resize Rocket
+
   }
 
   /**
@@ -25,12 +39,12 @@ public class Sketch2 extends PApplet {
    */
   public void draw() {
 	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
+    // draw background
+    image(imgSpace, 0, 0);
 
-    stroke(255);
-    line(50, 125, 70, 50);  
+    //rocket
+    image(imgRocket, 0, 0);
+
   }
   
   // define other methods down here.
