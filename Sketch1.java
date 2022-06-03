@@ -26,6 +26,7 @@ public class Sketch1 extends PApplet {
   public void draw() {
 	  PImage imgMenu;
     imgMenu = loadImage("");
+    //include Pics/
   }
   
   // define other methods down here.
