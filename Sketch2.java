@@ -7,6 +7,8 @@ public class Sketch2 extends PApplet {
 
   PImage imgSpace;
 	PImage imgRocket;
+  PImage imgMaze;
+  PImage imgEarth;
 	
 
   /**
@@ -15,7 +17,7 @@ public class Sketch2 extends PApplet {
 
   public void settings() {
 	// put your size call here
-    size(800, 500);
+    size(800, 550);
   }
 
   /** 
@@ -27,10 +29,13 @@ public class Sketch2 extends PApplet {
     // load images
     imgSpace = loadImage("Pics/BackgroundMenuscreen.jpg");
     imgRocket = loadImage("Pics/rocket.png");
+    imgMaze = loadImage("Pics/mazeoutline.png");
+    imgEarth = loadImage("Pics/earth.png");
 
     imgSpace.resize(imgSpace.width, imgSpace.height); //resize Space
-
-    imgRocket.resize(imgRocket.width*2, imgRocket.height*2); //resize Rocket
+    imgRocket.resize((int)(imgRocket.width * 0.4) , (int)(imgRocket.height * 0.4)); //resize Rocket
+    imgMaze.resize(800, 500); //resize Maze
+    imgEarth.resize((int)(imgEarth.width * 0.5) , (int)(imgEarth.height * 0.5)); //resize Earth
 
   }
 
@@ -43,7 +48,16 @@ public class Sketch2 extends PApplet {
     image(imgSpace, 0, 0);
 
     //rocket
-    image(imgRocket, 0, 0);
+    image(imgRocket, 130, 140);
+
+    // maze outline
+    image(imgMaze, 0, 0);
+
+    // earth
+    image(imgEarth, 360, 210);
+
+    rect(350, 198, 100, 10);
+    fill(0, 0, 255);
 
   }
   
