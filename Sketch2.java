@@ -9,6 +9,10 @@ public class Sketch2 extends PApplet {
 	PImage imgRocket;
   PImage imgMaze;
   PImage imgEarth;
+  PImage imgHeart1;
+  PImage imgHeart2;
+  PImage imgHeart3;
+  PImage imgAstro;
 	
 
   /**
@@ -31,11 +35,20 @@ public class Sketch2 extends PApplet {
     imgRocket = loadImage("Pics/rocket.png");
     imgMaze = loadImage("Pics/mazeoutline.png");
     imgEarth = loadImage("Pics/earth.png");
+    imgHeart1 = loadImage("Pics/heart1.png");
+    imgHeart2 = loadImage("Pics/heart2.png");
+    imgHeart3 = loadImage("Pics/heart3.png");
+    imgAstro = loadImage("Pics/astronaut.png");
 
     imgSpace.resize(imgSpace.width, imgSpace.height); //resize Space
     imgRocket.resize((int)(imgRocket.width * 0.4) , (int)(imgRocket.height * 0.4)); //resize Rocket
     imgMaze.resize(800, 500); //resize Maze
     imgEarth.resize((int)(imgEarth.width * 0.5) , (int)(imgEarth.height * 0.5)); //resize Earth
+    imgHeart1.resize(50, 50); //resize Heart1
+    imgHeart2.resize(50, 50); //resize Heart2
+    imgHeart3.resize(50, 50); //resize Heart3
+    imgAstro.resize(50, 50); //resize Astronaut
+  
 
   }
 
@@ -56,8 +69,20 @@ public class Sketch2 extends PApplet {
     // earth
     image(imgEarth, 360, 210);
 
+
+    fill(0, 0, 250);
     rect(350, 198, 100, 10);
-    fill(0, 0, 255);
+    
+    fill(0, 0, 0);
+    rect(0, 485, 800, 64);
+
+    // heart health
+    image(imgHeart1, 630, 490);
+    image(imgHeart2, 680, 490);
+    image(imgHeart3, 730, 490);
+
+    image(imgAstro, 50, 490);
+    
 
   }
   
