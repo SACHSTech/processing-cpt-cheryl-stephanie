@@ -13,6 +13,7 @@ public class Sketch2 extends PApplet {
   PImage imgHeart2;
   PImage imgHeart3;
   PImage imgAstro;
+  PImage imgEx;
 	
 
   /**
@@ -21,7 +22,7 @@ public class Sketch2 extends PApplet {
 
   public void settings() {
 	// put your size call here
-    size(800, 550);
+    size(900, 550);
   }
 
   /** 
@@ -40,14 +41,18 @@ public class Sketch2 extends PApplet {
     imgHeart3 = loadImage("Pics/heart3.png");
     imgAstro = loadImage("Pics/astronaut.png");
 
+    imgEx = loadImage("Pics/maze.png");
+
     imgSpace.resize(imgSpace.width, imgSpace.height); //resize Space
     imgRocket.resize((int)(imgRocket.width * 0.4) , (int)(imgRocket.height * 0.4)); //resize Rocket
-    imgMaze.resize(800, 500); //resize Maze
+    imgMaze.resize(900, 500); //resize Maze
     imgEarth.resize((int)(imgEarth.width * 0.5) , (int)(imgEarth.height * 0.5)); //resize Earth
     imgHeart1.resize(50, 50); //resize Heart1
     imgHeart2.resize(50, 50); //resize Heart2
     imgHeart3.resize(50, 50); //resize Heart3
     imgAstro.resize(50, 50); //resize Astronaut
+
+    imgEx.resize(900, 500); //resize Maze
   
 
   }
@@ -66,20 +71,23 @@ public class Sketch2 extends PApplet {
     // maze outline
     image(imgMaze, 0, 0);
 
+    // Ex maze outline
+    image(imgEx, 0, 0);
+
     // earth
-    image(imgEarth, 360, 210);
+    image(imgEarth, 410, 210);
 
 
     fill(0, 0, 250);
-    rect(350, 198, 100, 10);
+    rect(390, 198, 120, 10);
     
     fill(0, 0, 0);
-    rect(0, 485, 800, 64);
+    rect(0, 485, 900, 64);
 
     // heart health
-    image(imgHeart1, 630, 490);
-    image(imgHeart2, 680, 490);
-    image(imgHeart3, 730, 490);
+    image(imgHeart1, 660, 490);
+    image(imgHeart2, 720, 490);
+    image(imgHeart3, 780, 490);
 
     image(imgAstro, 50, 490);
     
