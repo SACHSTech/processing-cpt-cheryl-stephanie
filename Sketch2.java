@@ -33,7 +33,7 @@ public class Sketch2 extends PApplet {
   public void setup() {
     
     // load images
-    imgSpace = loadImage("Pics/BackgroundMenuscreen.jpg");
+    imgSpace = loadImage("Pics/BackgroundStars.jpg");
     imgRocket = loadImage("Pics/rocket.png");
     imgMaze = loadImage("Pics/mazeoutline.png");
     imgEarth = loadImage("Pics/earth.png");
