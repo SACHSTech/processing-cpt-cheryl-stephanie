@@ -15,6 +15,9 @@ public class Sketch2 extends PApplet {
   PImage imgAstro;
   PImage imgAlien;
   PImage imgEx;
+
+  float imgRocketX;
+  float imgRocketY;
 	
 
   /**
@@ -78,7 +81,7 @@ public class Sketch2 extends PApplet {
     image(imgEarth, 410, 210);
 
     //rocket
-    image(imgRocket, 130, 140);
+    //image(imgRocket, 130, 140);
 
     fill(0, 0, 250);
     rect(390, 198, 120, 10);
@@ -96,9 +99,33 @@ public class Sketch2 extends PApplet {
 
     // alien
     image(imgAlien, 133, 225);
+
+    //rocket
+    image(imgRocket, imgRocketX+100, imgRocketY+100);
     
 
   }
   
+  public void keyPressed() {
+     // circle moves accordingly to what arrow directions user presses
+     if (keyPressed) {
+      if (keyCode == UP) {
+        imgRocketY--;
+      } 
+      else if (keyCode == DOWN) {
+        imgRocketY++;
+      } 
+      else if(keyCode == LEFT){
+        imgRocketX--;
+      }
+      else if(keyCode == RIGHT){
+        imgRocketX++; 
+      }
+    }
+    
+    
+  }
+
+
   // define other methods down here.
 }
