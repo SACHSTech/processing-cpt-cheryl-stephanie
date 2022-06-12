@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 
 public class Sketch1 extends PApplet {
@@ -11,12 +12,18 @@ public class Sketch1 extends PApplet {
   int screenWidth;
   int screenData [] = new int [(rowNum - 1) * (columnNum - 1)];
 
+
+
+
   public void settings() {
 	 
    //calculatint the size of the screen
    screenHeight = rowNum * cellSize;
    screenWidth = columnNum * cellSize;
     size(screenWidth, screenHeight);
+
+    //load images
+   
   }
 
   /** 
@@ -25,52 +32,78 @@ public class Sketch1 extends PApplet {
    */
   public void setup() {
 
-    background(116, 118, 242);
+    background(13, 37, 145);
  
   }
 
- //include Pics/
+
+  public void draw() {
+    drawMap();
+  }
+
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
-  public void draw() {
-   
-   int levelData []= {
-      3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6,
-      1, 19, 26, 26, 22, 0, 19, 26, 26, 26, 26, 26, 26, 22, 0, 19, 26, 26, 22, 4,
-      1, 21, 0, 0, 21, 0, 21, 0, 0, 0, 0, 0, 0, 21, 0, 21, 0, 0, 21, 4,
-      1, 21, 0, 19, 24, 26, 16, 26, 26, 18, 18, 26, 26, 16, 26, 24, 22, 0, 21, 4,
-      1, 21, 0, 21, 0, 0, 21, 0, 0, 101, 101, 0, 0, 21, 0, 0, 21, 0, 21, 4,
-      1, 17, 26, 16, 26, 26, 20, 0, 99, 100, 100, 100, 0, 17, 26, 26, 16, 26, 20, 4,
-      1, 21, 0, 21, 0, 0, 21, 0, 0, 0, 0, 0, 0, 21, 0, 0, 21, 0, 21, 4,
-      1, 21, 0, 25, 18, 26, 16, 26, 26, 26, 26, 26, 26, 16, 26, 18, 28, 0, 21, 4,
-      1, 21, 0, 0, 21, 0, 21, 0, 0, 0, 0, 0, 0, 21, 0, 21, 0, 0, 21, 4,
-      1, 25, 26, 26, 28, 0, 25, 26, 26, 26, 26, 26, 26, 28, 0, 25, 26, 26, 28, 4,
-      9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 12,
-    };
-  
-   
+  public void drawMap() {
 
-    int x;
-    int y;
-  for (y = 0; y < screenHeight; y += cellSize) {
-    for (x = 0; x < screenWidth; x += cellSize) {
-      for ( int i = 0; i < rowNum * columnNum ; i++){
-        screenData [i] = levelData [i];
-        if (levelData [i] == 0 ) {
-          noStroke();
-          fill(101, 111, 117);
-          rect( x, y, cellSize, cellSize);
+    //background for the map
+    PImage mapBackground = loadImage("Pics/BackgroundStars.jpg");
+    mapBackground.resize(800, 435); 
+    image(mapBackground, 0, 0);
+   
+    int levelData [] [] = {
+      
+      //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
+      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+      {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+      {1, 0, 1, 0, 1, 1, 0, 1, 1, 2, 2, 1, 1, 0, 1, 1, 0, 1, 0, 1},
+      {1, 0, 0, 0, 0, 0, 0, 1, 3, 5, 5, 5, 1, 0, 0, 0, 0, 0, 0, 1},
+      {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1},
+      {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+      {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+      {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    };
+   
+  
+   for(int row = 0; row < levelData.length; row++) {
+     for(int column = 0; column < levelData [row].length; column++) {
+       int cell = levelData[row] [column];
+
+       //using the numbers on the 2D array to determine where each items is placed
+       if(cell == 1) {
+         PImage moonBlock = loadImage("Pics/moonBlock.png"); 
+         moonBlock.resize(40, 40);
+         image(moonBlock, (column * 40 - column) + 10 , (row * 40  - row) + 5);
         }
-       }
+
+       if(cell == 0){
+         noStroke();
+         fill(251, 255, 13);
+         ellipse((column * 40 - column) + 30, (row * 40 - row) + 25, 20, 20);
+        }
+
+        if (cell == 3){
+         PImage Earth = loadImage("Pics/BigEarth.png");
+          Earth.resize(30, 30);
+          image(Earth, (column * 40) + 10 , (row * 40) + 5);
+        } 
+
+        if (cell == 2){
+          noStroke();
+          fill(184, 111, 17);
+          rect((column * 40 - column) + 10 , (row * 40  - row) + 5, 40, 40);
+        }
+      }
     }
-  }
+    
+
+   
    
   }
-    //0 = rectangle, 1 = left border, 2 = top border, 4 = right border, 8= bottom border, 16 = pellets
  
-  
-  // define other methods down here.
 
   
  
