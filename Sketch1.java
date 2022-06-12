@@ -10,20 +10,13 @@ public class Sketch1 extends PApplet {
   int columnNum = 20;
   int screenHeight;
   int screenWidth;
-  int screenData [] = new int [(rowNum - 1) * (columnNum - 1)];
-
-
-
-
+ 
   public void settings() {
 	 
    //calculatint the size of the screen
    screenHeight = rowNum * cellSize;
    screenWidth = columnNum * cellSize;
     size(screenWidth, screenHeight);
-
-    //load images
-   
   }
 
   /** 
@@ -41,9 +34,6 @@ public class Sketch1 extends PApplet {
     drawMap();
   }
 
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
   public void drawMap() {
 
     //background for the map
@@ -51,6 +41,7 @@ public class Sketch1 extends PApplet {
     mapBackground.resize(800, 435); 
     image(mapBackground, 0, 0);
    
+    
     int levelData [] [] = {
       
       //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
@@ -72,36 +63,35 @@ public class Sketch1 extends PApplet {
      for(int column = 0; column < levelData [row].length; column++) {
        int cell = levelData[row] [column];
 
+
        //using the numbers on the 2D array to determine where each items is placed
        if(cell == 1) {
          PImage moonBlock = loadImage("Pics/moonBlock.png"); 
          moonBlock.resize(40, 40);
-         image(moonBlock, (column * 40 - column) + 10 , (row * 40  - row) + 5);
+         //image(moonBlock, (column * 40 - column) + 10 , (row * 40  - row) + 5);
+         image(moonBlock, column * 40, row * 40);
         }
 
        if(cell == 0){
          noStroke();
          fill(251, 255, 13);
-         ellipse((column * 40 - column) + 30, (row * 40 - row) + 25, 20, 20);
+         //ellipse((column * 40 - column) + 30, (row * 40 - row) + 25, 20, 20);
+         ellipse((column * 40) + 20, (row * 40) + 20 , 20, 20);
         }
 
         if (cell == 3){
          PImage Earth = loadImage("Pics/BigEarth.png");
-          Earth.resize(30, 30);
-          image(Earth, (column * 40) + 10 , (row * 40) + 5);
+          Earth.resize(40, 40);
+          image(Earth, (column * 40), (row * 40));
         } 
 
         if (cell == 2){
           noStroke();
           fill(184, 111, 17);
-          rect((column * 40 - column) + 10 , (row * 40  - row) + 5, 40, 40);
+          rect((column * 40) , (row * 40), 40, 40);
         }
       }
     }
-    
-
-   
-   
   }
  
 
