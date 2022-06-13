@@ -4,7 +4,7 @@ import processing.core.PImage;
 
 public class Sketch1 extends PApplet {
 	
-	//Variables for the playing screen 
+	//variables for the playing screen 
   int cellSize = 40;
   int rowNum = 12;
   int columnNum = 20;
@@ -13,7 +13,7 @@ public class Sketch1 extends PApplet {
  
   public void settings() {
 	 
-   //calculatint the size of the screen
+   //calculating the size of the screen
    screenHeight = rowNum * cellSize;
    screenWidth = columnNum * cellSize;
     size(screenWidth, screenHeight);
