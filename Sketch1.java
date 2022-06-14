@@ -10,7 +10,16 @@ public class Sketch1 extends PApplet {
   int columnNum = 20;
   int screenHeight;
   int screenWidth;
+
+  boolean menu = true;
+
+  boolean drawMenu = true;
+  boolean drawMap = false;
+  boolean drawEnd1 = false;
+  boolean drawEnd2 = false;
  
+  
+
   public void settings() {
 	 
    //calculating the size of the screen
@@ -26,24 +35,43 @@ public class Sketch1 extends PApplet {
   public void setup() {
 
     background(13, 37, 145);
- 
   }
 
+ 
 
-  public void draw() {
-    drawMap();
+ 
+
+  public void drawMenu(){
+    PImage starsGround = loadImage("Pics/BackgroundStars.jpg");
+    starsGround.resize(800, 480); 
+    image(starsGround, 0, 0);
+    textSize(40); 
+    text("Press s!", 300, 300);
+
+    if(keyPressed){
+      if(key == 's'){
+       drawMap = true;
+       drawMenu = false;
+       
+      }
+ 
+     }
+
+  
+
+    
+   
+    
   }
 
   public void drawMap() {
-
-    //background for the map
+    background(13, 37, 145);
     PImage mapBackground = loadImage("Pics/BackgroundStars.jpg");
     mapBackground.resize(800, 435); 
     image(mapBackground, 0, 0);
-   
+    
     
     int levelData [] [] = {
-      
       //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
@@ -69,7 +97,7 @@ public class Sketch1 extends PApplet {
          PImage moonBlock = loadImage("Pics/moonBlock.png"); 
          moonBlock.resize(40, 40);
          //image(moonBlock, (column * 40 - column) + 10 , (row * 40  - row) + 5);
-         image(moonBlock, column * 40, row * 40);
+         image(moonBlock, column * cellSize, row * 40);
         }
 
        if(cell == 0){
@@ -90,10 +118,61 @@ public class Sketch1 extends PApplet {
           fill(184, 111, 17);
           rect((column * 40) , (row * 40), 40, 40);
         }
+
+        //int secondTicks = second();
+
+       
       }
     }
-  }
+
+  
+    
+   
  
+     
+    
+      
+  
+  } 
+ 
+  public void Timer() {
+    //int secondTicks = 60;
+    for(int secondTicks = second(); secondTicks > 0; secondTicks++){
+      secondTicks++;
+      
+      fill(125);
+      textSize(30);
+      text(secondTicks, 760, 470);
+      
+    }
+
+  }
+   
+  public void draw() {
+
+
+    if(drawMenu = true){
+      drawMenu();
+    }
+
+    else if(drawMap = true) {
+      
+      drawMap();
+      Timer();
+      
+    }
+
+    else if(drawEnd1 = true) {
+
+    }
+
+    else if(drawEnd2 = true) {
+
+    }
+
+    
+  }
+  
 
   
  
