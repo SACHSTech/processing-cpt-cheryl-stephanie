@@ -17,6 +17,13 @@ public class Sketch extends PApplet {
   PImage imgHeart;
   PImage imgAstro;
   PImage imgAlien;
+
+  //boolean
+  boolean inGame = false;
+  boolean dying = false;
+
+  int pacman_x, pacman_y, pacmand_x, pacmand_y;
+  int req_dx, req_dy, view_dx, view_dy;
  
   public void settings() {
     //calculating the size of the screen
@@ -45,7 +52,6 @@ public class Sketch extends PApplet {
  
   }
 
-
   public void draw() {
     drawMap();
 
@@ -60,9 +66,6 @@ public class Sketch extends PApplet {
     // alien
     image(imgAlien, 133, 225);
 
-    //rocket
-    image(imgRocket, imgRocketX+100, imgRocketY+100);
-
   }
 
   public void drawMap() {
@@ -72,12 +75,11 @@ public class Sketch extends PApplet {
     mapBackground.resize(800, 435); 
     image(mapBackground, 0, 0);
    
-    
     int levelData [] [] = {
       
-      //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
+      //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2, rocket = 9
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-      {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 9, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
       {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
       {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
       {1, 0, 1, 0, 1, 1, 0, 1, 1, 2, 2, 1, 1, 0, 1, 1, 0, 1, 0, 1},
@@ -88,7 +90,6 @@ public class Sketch extends PApplet {
       {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     };
-   
   
    for(int row = 0; row < levelData.length; row++) {
      for(int column = 0; column < levelData [row].length; column++) {
@@ -121,28 +122,31 @@ public class Sketch extends PApplet {
           fill(184, 111, 17);
           rect((column * 40) , (row * 40), 40, 40);
         }
+
+        if(cell == 9) {
+          image(imgRocket, column*40, row*40);
+         }
       }
     }
   }
+
   public void keyPressed() {
     // circle moves accordingly to what arrow directions user presses
     if (keyPressed) {
-     if (keyCode == UP) {
+      if (keyCode == UP) {
        imgRocketY--;
-     } 
-     else if (keyCode == DOWN) {
+      } 
+      else if (keyCode == DOWN) {
        imgRocketY++;
-     } 
-     else if(keyCode == LEFT){
+      } 
+      else if(keyCode == LEFT){
        imgRocketX--;
-     }
-     else if(keyCode == RIGHT){
+      }
+      else if(keyCode == RIGHT){
        imgRocketX++; 
-     }
-   }
-   
-   
- }
+      }
+    }
+  }
 
  
 }
