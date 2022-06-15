@@ -31,8 +31,8 @@ public class Sketch extends PApplet {
   }
 
   public void setup() {
-
-    drawMenu = true;
+    drawEnd2 = true;
+    //drawMenu = true;
     background(13, 37, 145);
    
   }
@@ -302,7 +302,7 @@ public class Sketch extends PApplet {
     text("The spaceship landed on earth safely. Yay!", 20, 200);
 
     textSize(20);
-    text("'Press r to go back to the main menu'", 20, 250);
+    text("'Click to go back to the main menu'", 20, 250);
   
     PImage landRock = loadImage("Pics/clipart63877.png");
     landRock.resize(150, 300);
@@ -321,11 +321,10 @@ public class Sketch extends PApplet {
     ellipse(50, 60, 80, 80);
 
     //return to menu screen
-    if(keyPressed){
-      if(key == 'r'){
-        drawMenu = true;
-        drawEnd1 = false;
-      }
+    if(mousePressed){
+
+      drawMenu = true;
+      drawEnd2 = false;
     }
   }
 
