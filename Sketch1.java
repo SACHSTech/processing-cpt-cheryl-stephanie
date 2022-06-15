@@ -111,7 +111,7 @@ public class Sketch1 extends PApplet {
     image(astroP, 0, 440);
 
     PImage imgRocket = loadImage("Pics/rocket.png");
-    imgRocket.resize(40, 40); //resize Alien
+    imgRocket.resize(40, 40); 
     
     
     int levelData [] [] = {
