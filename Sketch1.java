@@ -11,19 +11,14 @@ public class Sketch1 extends PApplet {
   int screenHeight;
   int screenWidth;
 
+  float imgRocketX;
+  float imgRocketY;
+
   //boolean values for screen switching
   boolean drawMenu;
   boolean drawMap;
   boolean drawEnd1;
   boolean drawEnd2;
-
-  
-  
-  
-  
-  
-  
-  
   
   
   public void settings() {
@@ -66,6 +61,7 @@ public class Sketch1 extends PApplet {
     else if(drawEnd2) {
       drawEnd2();
     }
+
  }
  
 
@@ -111,12 +107,15 @@ public class Sketch1 extends PApplet {
     PImage astroP = loadImage("Pics/astronaut.png");
     astroP.resize(40, 40);
     image(astroP, 0, 440);
+
+    PImage imgRocket = loadImage("Pics/rocket.png");
+    imgRocket.resize(40, 40); //resize Alien
     
     
     int levelData [] [] = {
       //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-      {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 9, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
       {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
       {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
       {1, 0, 1, 0, 1, 1, 0, 1, 1, 2, 2, 1, 1, 0, 1, 1, 0, 1, 0, 1},
@@ -157,10 +156,32 @@ public class Sketch1 extends PApplet {
           noStroke();
           fill(184, 111, 17);
           rect((column * 40) , (row * 40), 40, 40);
-        }     
+        }   
+
+        if(cell == 9) {
+          image(imgRocket, column*40, row*40);
+        }
       }
     }
   } 
+
+  public void keyPressed() {
+    // circle moves accordingly to what arrow directions user presses
+    if (keyPressed) {
+      if (keyCode == UP) {
+       imgRocketY--;
+      } 
+      else if (keyCode == DOWN) {
+       imgRocketY++;
+      } 
+      else if(keyCode == LEFT){
+       imgRocketX--;
+      }
+      else if(keyCode == RIGHT){
+       imgRocketX++; 
+      }
+    }
+  }
  
   private final long createdMillis = System.currentTimeMillis();
   public void Timer() {
