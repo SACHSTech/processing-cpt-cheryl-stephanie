@@ -30,10 +30,6 @@ public class Sketch extends PApplet {
   size(screenWidth, screenHeight);
   }
 
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
   public void setup() {
 
     drawMenu = true;
@@ -53,6 +49,10 @@ public class Sketch extends PApplet {
      
      drawMap();
      Timer();
+     keyPressed();
+     PImage imgRocket = loadImage("Pics/rocket.png");
+      imgRocket.resize(40, 40);
+      image(imgRocket, imgRocketX, imgRocketY);
     }
 
     else if(drawEnd1) {
@@ -63,9 +63,7 @@ public class Sketch extends PApplet {
       drawEnd2();
     }
 
-    PImage imgRocket = loadImage("Pics/rocket.png");
-    imgRocket.resize(40, 40);
-    image(imgRocket, imgRocketX, imgRocketY);
+    
 
  }
  
@@ -124,11 +122,11 @@ public class Sketch extends PApplet {
       //coloured rectangles = 6
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 6, 1, 0, 0, 1, 6, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 6, 0, 0, 0, 0, 6, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 6, 0, 0, 0, 0, 6, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 1, 6, 0, 0, 6, 1, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 1, 0, 1, 1},
       {1, 0, 1, 0, 0, 1, 0, 1, 4, 1, 1, 1, 1, 4, 1, 0, 1, 0, 1, 1},
       {1, 0, 1, 1, 1, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 0, 0, 0, 1},
       {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 1, 4, 1, 0, 0, 0, 3, 1},
@@ -171,6 +169,7 @@ public class Sketch extends PApplet {
 
   public void keyPressed() {
 
+    
     int speed = 40;
     //int stepCount = 0;
      // circle moves accordingly to what arrow directions user presses
@@ -188,20 +187,19 @@ public class Sketch extends PApplet {
           imgRocketY -= speed;
         }
       }
-
        
-        else if (keyCode == DOWN) {
-          if(imgRocketY > 320){
-            speed = 0;
-          }
-          else{
-            speed = 40;
-            imgRocketY += speed;
-            //stepCount += 1;
-          }
-        } 
+      else if (keyCode == DOWN) {
+        if(imgRocketY > 320){
+           speed = 0;
+        }
+        else{
+          speed = 40;
+          imgRocketY += speed;
+          
+        }
+      } 
 
-        else if(keyCode == LEFT){
+      else if(keyCode == LEFT){
           if(imgRocketX < 80){
             speed = 0;
           }
@@ -211,7 +209,7 @@ public class Sketch extends PApplet {
           }
         }
 
-        else if(keyCode == RIGHT){
+       else if(keyCode == RIGHT){
           if(imgRocketX > 700){
             speed = 0;
           }
@@ -249,22 +247,22 @@ public class Sketch extends PApplet {
     if (nowSecond > 30 && nowSecond < 35){
       fill(237, 234, 69);
       textSize(15);
-      text("<(less than 30 seconds left... Speed up!)", 45, 460);
+      text("<(less than 10 seconds left... Speed up!)", 45, 460);
     }
 
-    if (nowSecond > 50 && nowSecond < 56){
+    if (nowSecond > 36 && nowSecond < 38){
       fill(237, 234, 69);
       textSize(15);
       text("<(The spaceship is breaking apart.. oxygen is depleting...)", 45, 460);
     }
 
-    if (nowSecond == 58 || nowSecond == 59 || nowSecond == 57){
+    if (nowSecond == 40 || nowSecond == 39){
       fill(237, 234, 69);
       textSize(15);
       text("<(Is this the end?)", 45, 460);
     }
     
-    if(nowSecond == 60) {
+    if(nowSecond == 40) {
       drawEnd1 = true;
       drawMap = false;
     }
