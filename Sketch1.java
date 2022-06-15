@@ -35,8 +35,7 @@ public class Sketch1 extends PApplet {
    */
   public void setup() {
 
-    //drawMenu = true;
-    drawEnd2 = true;
+    drawMenu = true;
     background(13, 37, 145);
    
   }
