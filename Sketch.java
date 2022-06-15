@@ -207,6 +207,7 @@ public class Sketch extends PApplet {
           if(imgRocketX < 80){
             speed = 0;
           }
+
           else{
             imgRocketX -= speed;
           }
@@ -216,6 +217,9 @@ public class Sketch extends PApplet {
           if(imgRocketX > 700){
             speed = 0;
           }
+          //else if(imgRocketX == 40 || imgRocketX == 200){
+            //speed = 0;
+          //}
           else{
             imgRocketX += speed; 
           }
