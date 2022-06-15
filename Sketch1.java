@@ -35,7 +35,8 @@ public class Sketch1 extends PApplet {
    */
   public void setup() {
 
-    drawMenu = true;
+    //drawMenu = true;
+    drawEnd2 = true;
     background(13, 37, 145);
    
   }
@@ -114,17 +115,17 @@ public class Sketch1 extends PApplet {
     
     
     int levelData [] [] = {
-      //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
+      //moonBlock = 1, empty space = 0, meteor = 4, coloured rectangles = 6
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-      {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-      {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
-      {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-      {1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1},
-      {1, 0, 0, 0, 1, 1, 0, 1, 0, 3, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1},
-      {1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1},
-      {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-      {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
-      {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 6, 1, 0, 0, 1, 6, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 4, 1, 1, 1, 1, 4, 1, 0, 1, 0, 1, 1},
+      {1, 0, 1, 1, 1, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 0, 0, 0, 1},
+      {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 1, 4, 1, 0, 0, 0, 3, 1},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     };
    
@@ -146,6 +147,18 @@ public class Sketch1 extends PApplet {
           Earth.resize(40, 40);
           image(Earth, (column * 40), (row * 40));
         } 
+
+        if(cell == 4) {
+          PImage Meteor = loadImage("Pics/comet.png");
+          Meteor.resize(40, 40);
+          image(Meteor, (column * 40), (row * 40));
+        }
+
+        if(cell == 6) {
+          noStroke();
+          fill(250, 123, 12);
+          rect((column * 40), (row * 40), 40, 40);
+        }
 
       }
     }
@@ -246,7 +259,7 @@ public class Sketch1 extends PApplet {
     text("The spaceship landed on earth safely. Yay!", 20, 200);
 
     textSize(20);
-    text("'Press r to go back to the main menu'", 20, 250);
+    text("'Click to go back to the main menu'", 20, 250);
   
     PImage landRock = loadImage("Pics/clipart63877.png");
     landRock.resize(150, 300);
@@ -265,11 +278,11 @@ public class Sketch1 extends PApplet {
     ellipse(50, 60, 80, 80);
 
     //return to menu screen
-    if(keyPressed){
-      if(key == 'r'){
-        drawMenu = true;
-        drawEnd1 = false;
-      }
+    if(mousePressed){
+
+      drawMenu = true;
+      drawEnd2 = false;
+
     }
   }
   
