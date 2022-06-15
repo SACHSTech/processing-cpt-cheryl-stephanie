@@ -161,10 +161,7 @@ public class Sketch extends PApplet {
           fill(184, 111, 17);
           rect((column * 40) , (row * 40), 40, 40);
         }   
-
-        if(cell == 9) {
-          image(imgRocket, column*40, row*40);
-        }
+        
       }
     }
   } 
@@ -186,11 +183,9 @@ public class Sketch extends PApplet {
         else{
           speed = 40;
           imgRocketY -= speed;
-          //stepCount += 1;
         }
       }
 
-      // if ship lands flag at corner, collect all the rectangle should open
        
         else if (keyCode == DOWN) {
           if(imgRocketY > 320){
