@@ -116,7 +116,7 @@ public class Sketch extends PApplet {
     PImage imgRocket = loadImage("Pics/rocket.png");
     imgRocket.resize(40, 40); //resize Alien
     
-    
+
     int levelData [] [] = {
       //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -136,7 +136,6 @@ public class Sketch extends PApplet {
    for(int row = 0; row < levelData.length; row++) {
      for(int column = 0; column < levelData [row].length; column++) {
        int cell = levelData[row] [column];
-
 
        //using the numbers on the 2D array to determine where each items is placed
        if(cell == 1) {
@@ -187,17 +186,14 @@ public class Sketch extends PApplet {
           imgRocketY -= speed;
           //stepCount += 1;
         }
-        
       }
 
       // if ship lands flag at corner, collect all the rectangle should open
        
-      
         else if (keyCode == DOWN) {
           if(imgRocketY > 320){
             speed = 0;
           }
-
           else{
             speed = 40;
             imgRocketY += speed;
@@ -206,11 +202,21 @@ public class Sketch extends PApplet {
         } 
 
         else if(keyCode == LEFT){
-          imgRocketX -= speed;
+          if(imgRocketX < 80){
+            speed = 0;
+          }
+          else{
+            imgRocketX -= speed;
+          }
         }
 
         else if(keyCode == RIGHT){
-          imgRocketX += speed; 
+          if(imgRocketX > 700){
+            speed = 0;
+          }
+          else{
+            imgRocketX += speed; 
+          }
         }
 
         //text("Steps travelled: " + stepCount, 45, 60 );
@@ -240,7 +246,6 @@ public class Sketch extends PApplet {
       fill(237, 234, 69);
       textSize(15);
       text("<(less than 30 seconds left... Speed up!)", 45, 460);
-      
     }
 
     if (nowSecond > 50 && nowSecond < 56){
@@ -321,6 +326,6 @@ public class Sketch extends PApplet {
       }
     }
   }
-  
+
  
 }
