@@ -11,22 +11,29 @@ public class Sketch extends PApplet {
   int screenHeight;
   int screenWidth;
 
-  float imgRocketX;
-  float imgRocketY;
+  int imgRocketX = 140;
+  int imgRocketY = 140;
+
+  int speed = 6;
+
+  int pacman_x, pacman_y, pacmand_x, pacmand_y;
+  int req_dx, req_dy;
+
+  short[] screenData;
 
   //boolean values for screen switching
   boolean drawMenu;
   boolean drawMap;
   boolean drawEnd1;
   boolean drawEnd2;
-  
-  
+  boolean movePacman;
+
   public void settings() {
 	 
    //calculating the size of the screen
    screenHeight = rowNum * cellSize;
    screenWidth = columnNum * cellSize;
-    size(screenWidth, screenHeight);
+   size(screenWidth, screenHeight);
   }
 
   /** 
@@ -34,7 +41,6 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-
     drawMenu = true;
     background(13, 37, 145);
    
@@ -44,12 +50,10 @@ public class Sketch extends PApplet {
 
     //using if() to figure out which screen is needed while playing th game
     if(drawMenu){
-     
       drawMenu();
     }
 
     else if(drawMap) {
-     
      drawMap();
      Timer();
     }
@@ -94,6 +98,7 @@ public class Sketch extends PApplet {
      drawMap = true;
      drawMenu = false;
     } 
+
   }
 
   public void drawMap() {
@@ -109,11 +114,18 @@ public class Sketch extends PApplet {
     image(astroP, 0, 440);
 
     PImage imgRocket = loadImage("Pics/rocket.png");
-    imgRocket.resize(40, 40); //resize Alien
-    
+    imgRocket.resize(40, 40);
+    image(imgRocket, imgRocketX, imgRocketY);
+
     
     int levelData [] [] = {
-      //rectangle = 1, pellets = 0, 5 = empty space, final destination = 3, barricade = 2
+      //rectangle = 1
+      //pellets = 0
+      //empty space = 5
+      //final destination = 3
+      //barricade = 2
+      //rocket = 9
+
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 9, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
       {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
@@ -158,18 +170,64 @@ public class Sketch extends PApplet {
           rect((column * 40) , (row * 40), 40, 40);
         }   
 
-        if(cell == 9) {
-          image(imgRocket, column*40, row*40);
-        }
+        //if(cell == 9) {
+          //image(imgRocket, column*40, row*40);
+        //}
       }
     }
   } 
+
+  /* 
+  public void movePacman() {
+
+    int levelData [] [] = {
+      
+      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 9, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+      {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+      {1, 0, 1, 0, 1, 1, 0, 1, 1, 2, 2, 1, 1, 0, 1, 1, 0, 1, 0, 1},
+      {1, 0, 0, 0, 0, 0, 0, 1, 3, 5, 5, 5, 1, 0, 0, 0, 0, 0, 0, 1},
+      {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1},
+      {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+      {1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1},
+      {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    };
+   
+  
+  for(int row = 0; row < levelData.length; row++) {
+     for(int column = 0; column < levelData [row].length; column++) {
+       if (int cell = levelData[row] [column]) {
+        speed = 0;
+       }
+     }
+  }
+
+
+    int pos;
+    short ch;
+
+    if (pacman_x % cellSize == 0 && pacman_y % cellSize == 0) {
+      pos = pacman_x / cellSize + columnNum * (int) (pacman_y / cellSize);
+      ch = screenData[pos];
+
+      if (req_dx != 0 || req_dy != 0) {
+        if (!((req_dx == -1 && req_dy == 0 && (ch & 1) != 0) || (req_dx == 1 && req_dy == 0 && (ch & 4) != 0) || (req_dx == 0 && req_dy == -1 && (ch & 2) != 0) || (req_dx == 0 && req_dy == 1 && (ch & 8) != 0))) {
+          pacmand_x = req_dx;
+          pacmand_y = req_dy;
+        }
+      }
+    }
+  }
+  */
+  
 
   public void keyPressed() {
     // circle moves accordingly to what arrow directions user presses
     if (keyPressed) {
       if (keyCode == UP) {
-       imgRocketY--;
+       imgRocketY-- ;
       } 
       else if (keyCode == DOWN) {
        imgRocketY++;
@@ -182,7 +240,10 @@ public class Sketch extends PApplet {
       }
     }
   }
- 
+  
+  
+  
+  
   private final long createdMillis = System.currentTimeMillis();
   public void Timer() {
   
