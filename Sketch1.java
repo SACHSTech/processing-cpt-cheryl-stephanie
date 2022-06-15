@@ -52,6 +52,7 @@ public class Sketch1 extends PApplet {
      
      drawMap();
      Timer();
+     
     }
 
     else if(drawEnd1) {
