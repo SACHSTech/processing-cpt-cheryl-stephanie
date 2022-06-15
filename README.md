@@ -7,6 +7,6 @@ The rocket journey starts at 3 seconds and is being timed for 60 seconds before 
 
 If you have successfully collected all the stars under 60 seconds, the spaceship will land safely on earth. Congratulations!
 
-After 60 seconds, and the failure to collect all stars, you will be trapped in space and the game ends as you have died from suffocation. 
+After 40 seconds, and the failure to collect all stars, you will be trapped in space and the game ends as you have died from suffocation. 
 
 To restart the game, press "r" to go back to main menu. 

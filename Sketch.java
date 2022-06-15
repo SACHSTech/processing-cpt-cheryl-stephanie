@@ -241,7 +241,7 @@ public class Sketch extends PApplet {
       fill(237, 234, 69);
       textSize(15);
       text("<(Use arrows keys to navigate the spaceship.Collect all of the fuel to go back to Earth)", 45, 460);
-      text("**Hurry! you only have 60sec!!", 45, 474);
+      text("**Hurry! you only have 40sec!!", 45, 474);
     }
 
     if (nowSecond > 30 && nowSecond < 35){
