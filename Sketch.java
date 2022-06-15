@@ -181,14 +181,18 @@ public class Sketch extends PApplet {
         if(imgRocketY < 80){
           speed = 0;
         }
-
-        
+        else if(imgRocketY == 360){
+          speed = 0;
+          if (imgRocketX == 240){
+            speed = 40;
+            imgRocketY -= speed;
+          }
+        }
         else{
           speed = 40;
           imgRocketY -= speed;
         }
       }
-
        
         else if (keyCode == DOWN) {
           if(imgRocketY > 320){
@@ -205,19 +209,40 @@ public class Sketch extends PApplet {
           if(imgRocketX < 80){
             speed = 0;
           }
-
+          else if(imgRocketX == 240){
+            speed = 0;
+          }
+          else if(imgRocketX == 600){
+            speed = 0;
+          }
           else{
             imgRocketX -= speed;
           }
         }
 
         else if(keyCode == RIGHT){
-          if(imgRocketX > 700){
+          if(imgRocketX > 660){
             speed = 0;
+            if (imgRocketY == 360 || imgRocketY == 320){
+              speed = 40;
+              imgRocketX += speed;
+            }
           }
-          //else if(imgRocketX == 40 || imgRocketX == 200){
-            //speed = 0;
-          //}
+          else if(imgRocketX == 40){
+            speed = 0;
+            if (imgRocketY == 360){
+              speed = 40;
+              imgRocketX += speed;
+            }
+          }
+          else if(imgRocketX == 240){
+            speed = 0;
+            imgRocketX += speed;
+            if (imgRocketY == 40){
+              speed = 40;
+              imgRocketX += speed;
+            }
+          }
           else{
             imgRocketX += speed; 
           }
@@ -242,7 +267,7 @@ public class Sketch extends PApplet {
     if (nowSecond < 20){
       fill(237, 234, 69);
       textSize(15);
-      text("<(Use arrows keys to navigate the spaceship.Collect all of the fuel to go back to Earth)", 45, 460);
+      text("<(Use arrows keys to navigate the spaceship. Collect all of the fuel to go back to Earth)", 45, 460);
       text("**Hurry! you only have 60sec!!", 45, 474);
     }
 
