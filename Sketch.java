@@ -144,14 +144,14 @@ public class Sketch extends PApplet {
       //coloured rectangles = 6
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 6, 0, 0, 0, 0, 6, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 6, 0, 0, 0, 0, 6, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 1, 6, 0, 0, 6, 1, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 0, 0, 1, 0, 1, 4, 1, 1, 1, 1, 4, 1, 0, 1, 0, 1, 1},
-      {1, 0, 1, 1, 1, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 1, 4, 1, 0, 0, 3, 0, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 6, 0, 0, 0, 0, 6, 1, 0, 0, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 6, 0, 0, 0, 0, 6, 1, 0, 0, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 1, 6, 0, 0, 6, 1, 1, 0, 0, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 0, 0, 1, 1},
+      {1, 0, 1, 0, 0, 1, 0, 1, 4, 1, 1, 1, 1, 4, 1, 0, 0, 0, 1, 1},
+      {1, 0, 1, 1, 1, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 0, 0, 1, 1},
+      {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 1, 4, 1, 0, 0, 3, 1, 1},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     };
    
@@ -278,10 +278,18 @@ public class Sketch extends PApplet {
         }
       }
 
-      if(imgRocketY == 80 && imgRocketX > 240 && imgRocketX < 460) {
+      //checking for potential endings
+      if(imgRocketY == 360 && imgRocketX == 680  ){
+        drawEnd2 = true;
+        drawMap = false;
+      }
+
+      else if(imgRocketY == 80 && imgRocketX > 240 && imgRocketX < 580) {
         drawMap = false;
         drawEnd3 = true; 
       }
+
+     
 
      
     } 
@@ -301,7 +309,7 @@ public class Sketch extends PApplet {
     if (nowSecond < 20){
       fill(237, 234, 69);
       textSize(15);
-      text("<(Use arrows keys to navigate the spaceship. Collect all of the fuel to go back to Earth)", 45, 460);
+      text("<(Use arrows keys to navigate the spaceship. Your spaceship is deteriorating and need to fix it on Earth)", 45, 460);
       text("**Hurry! you only have 40sec!!", 45, 474);
     }
 
