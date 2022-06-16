@@ -1,43 +1,52 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * ICS3U1B CPT Processing Game: "Back to Earth"
+ * @authors: Stephanie Tam & Cheryl Lee
+ */
 
 public class Sketch extends PApplet {
 
-  //images
+  // images
   PImage starsGround;
-  PImage Earth;
-  PImage Sat;
-  PImage Rocket;
+  PImage earth;
+  PImage sat;
+  PImage rocket;
   PImage mapBackground;
   PImage astroP;
   PImage imgRocket;
+  PImage landRock;
+  PImage xFace;
+  PImage astroJump;
+  PImage meteor;
+  PImage moonBlock;
 	
-	//variables for the playing screen 
+	// variables for the playing screen 
   int cellSize = 40;
   int rowNum = 12;
   int columnNum = 20;
   int screenHeight;
   int screenWidth;
 
+  // rocket location
   int imgRocketY = 40;
   int imgRocketX = 40;
 
-
-  //boolean values for screen switching
+  // boolean values for screen switching
   boolean drawMenu;
   boolean drawMap;
   boolean drawEnd1;
   boolean drawEnd2;
   boolean drawEnd3;
 
-  
+
   public void settings() {
 	 
    //calculating the size of the screen
    screenHeight = rowNum * cellSize;
    screenWidth = columnNum * cellSize;
-  size(screenWidth, screenHeight);
+   size(screenWidth, screenHeight);
   }
 
   public void setup() {
@@ -49,15 +58,14 @@ public class Sketch extends PApplet {
     starsGround = loadImage("Pics/BackgroundStars.jpg");
     starsGround.resize(800, 480); 
 
-    Earth = loadImage("Pics/BigEarth.png");
-    Earth.resize(600, 600);
+    earth = loadImage("Pics/BigEarth.png");
+    earth.resize(600, 600);
 
-    Sat = loadImage("Pics/satellite.png");
-    Sat.resize(50,50);
+    sat = loadImage("Pics/satellite.png");
+    sat.resize(50,50);
 
-    Rocket = loadImage("Pics/rocket.png");
-    Rocket.resize(200,200);
-
+    rocket = loadImage("Pics/rocket.png");
+    rocket.resize(200,200);
 
     // load images for Map
     mapBackground = loadImage("Pics/BackgroundStars.jpg");
@@ -68,27 +76,40 @@ public class Sketch extends PApplet {
 
     imgRocket = loadImage("Pics/rocket.png");
     imgRocket.resize(40, 40); 
+
+    moonBlock = loadImage("Pics/moonBlock.png"); 
+    moonBlock.resize(40, 40);
+
+    // load images for Ending
+    landRock = loadImage("Pics/clipart63877.png");
+    landRock.resize(150, 300);
+
+    xFace = loadImage("Pics/melt.png");
+    xFace.resize(200, 200);
+
+    astroJump = loadImage("Pics/PinClipart.com_astronaut-clipart_311716.png");
+    astroJump.resize(100, 100);
+
+    meteor = loadImage("Pics/comet.png");
+    meteor.resize(200, 200);
    
   }
 
   public void draw() {
 
-    //using if() to figure out which screen is needed while playing th game
+    //using if() to figure out which screen is needed while playing the game
+
     if(drawMenu){
-     
       drawMenu();
     }
 
     else if(drawMap) {
-     
      drawMap();
      Timer();
      keyPressed();
      PImage imgRocket = loadImage("Pics/rocket.png");
       imgRocket.resize(40, 40);
       image(imgRocket, imgRocketX, imgRocketY);
-        
-  
     }
 
     else if(drawEnd1) {
@@ -102,19 +123,15 @@ public class Sketch extends PApplet {
     else if(drawEnd3){
       drawEnd3();
     }
-
  }
 
   public void drawMenu(){
 
     //menu screen
     image(starsGround, 0, 0);
-    
-    image(Earth, 400, 300);
-    
-    image(Sat, 600, 200);
-
-    image(Rocket, 60, 130);
+    image(earth, 400, 300);
+    image(sat, 600, 200);
+    image(rocket, 60, 130);
 
     fill(247, 249, 252);
     textSize(60);
@@ -132,11 +149,10 @@ public class Sketch extends PApplet {
 
     //playing level screen
     background(13, 37, 145);
-    
     image(mapBackground, 0, 0);
-    
     image(astroP, 0, 440);
 
+    // 2-Dimentional arrays
     int levelData [] [] = {
       //moonBlock = 1
       //empty space = 0
@@ -155,28 +171,25 @@ public class Sketch extends PApplet {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     };
    
-  
    for(int row = 0; row < levelData.length; row++) {
      for(int column = 0; column < levelData [row].length; column++) {
        int cell = levelData[row] [column];
 
-       //using the numbers on the 2D array to determine where each items is placed
+       // using the numbers on the 2D array to determine where each item is placed
        if(cell == 1) {
-         PImage moonBlock = loadImage("Pics/moonBlock.png"); 
-         moonBlock.resize(40, 40);
          image(moonBlock, column * cellSize, row * 40);
         }
 
         if (cell == 3){
-          PImage Earth = loadImage("Pics/BigEarth.png");
-          Earth.resize(40, 40);
-          image(Earth, (column * 40), (row * 40));
+          PImage earth = loadImage("Pics/BigEarth.png");
+          earth.resize(40, 40);
+          image(earth, (column * 40), (row * 40));
         } 
 
         if(cell == 4) {
-          PImage Meteor = loadImage("Pics/comet.png");
-          Meteor.resize(40, 40);
-          image(Meteor, (column * 40), (row * 40));
+          PImage meteor = loadImage("Pics/comet.png");
+          meteor.resize(40, 40);
+          image(meteor, (column * 40), (row * 40));
         }
 
         if(cell == 6) {
@@ -184,18 +197,16 @@ public class Sketch extends PApplet {
           fill(250, 123, 12);
           rect((column * 40), (row * 40), 40, 40);
         }
-
       }
     }
   } 
 
   public void keyPressed() {
 
-    
-    int speed = 40;
-    
+    int speed = 40;    
    
-    // circle moves accordingly to what arrow directions user presses
+    // user input & interactivity
+    // rocket moves accordingly to what arrow directions user presses
     if (keyPressed) {
       
       if (keyCode == UP) {
@@ -218,20 +229,16 @@ public class Sketch extends PApplet {
        
       else if (keyCode == DOWN) {
 
-  
-
         if(imgRocketY > 320){
            speed = 0;
         }
         else{
           speed = 40;
           imgRocketY += speed;
-          
         }
       } 
 
       else if(keyCode == LEFT){
-       
 
        if(imgRocketX < 80){
          speed = 0;
@@ -242,7 +249,6 @@ public class Sketch extends PApplet {
         else if(imgRocketX == 600){
           speed = 0;
         }
-
         else{
           imgRocketX -= speed;
         }
@@ -272,13 +278,12 @@ public class Sketch extends PApplet {
             imgRocketX += speed;
           }
         }
-
         else{
           imgRocketX += speed; 
         }
       }
 
-      //checking for potential endings
+      // checking for potential endings
       if(imgRocketY == 360 && imgRocketX == 680  ){
         drawEnd2 = true;
         drawMap = false;
@@ -288,10 +293,6 @@ public class Sketch extends PApplet {
         drawMap = false;
         drawEnd3 = true; 
       }
-
-     
-
-     
     } 
   }
  
@@ -339,21 +340,19 @@ public class Sketch extends PApplet {
   
   public void drawEnd1() {
 
-    //bad end
+    // bad ending
     background(145, 41, 20);
     fill(242, 238, 237);
     textSize(40);
     text("You are trapped in space and died of suffocation.", 0, 80);
 
-    PImage xFace = loadImage("Pics/melt.png");
-    xFace.resize(200, 200);
     image(xFace, 300, 150);
 
     fill(242, 238, 237);
     textSize(30);
     text("'Press r to go back to the main menu'", 160, 420);
 
-    //return to menu screen
+    // return to menu screen
     if(keyPressed){
       if(key == 'r'){
         drawMenu = true;
@@ -364,21 +363,16 @@ public class Sketch extends PApplet {
 
   public void drawEnd2 () {
 
-    //Happy end
+    // happy ending
     background(62, 114, 237);
     fill(0);
     textSize(30);
-    text("The spaceship landed on earth safely. Yay!", 20, 200);
+    text("The spaceship landed on Earth safely. Yay!", 20, 200);
 
     textSize(20);
     text("'Click to go back to the main menu'", 20, 250);
-  
-    PImage landRock = loadImage("Pics/clipart63877.png");
-    landRock.resize(150, 300);
+      
     image(landRock, 600, 130);
-
-    PImage astroJump = loadImage("Pics/PinClipart.com_astronaut-clipart_311716.png");
-    astroJump.resize(100, 100);
     image(astroJump, 520, 335);
 
     noStroke();
@@ -409,9 +403,7 @@ public class Sketch extends PApplet {
   textSize(40);
   text("You are crushed by an incoming meteor.", 20, 80);
 
-  PImage Meteor = loadImage("Pics/comet.png");
-  Meteor.resize(200, 200);
-  image(Meteor, 300, 150);
+  image(meteor, 300, 150);
 
   fill(242, 238, 237);
   textSize(30);
