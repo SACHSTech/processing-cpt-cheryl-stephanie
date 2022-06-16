@@ -20,6 +20,7 @@ public class Sketch extends PApplet {
   boolean drawMap;
   boolean drawEnd1;
   boolean drawEnd2;
+  boolean drawEnd3;
 
   
   public void settings() {
@@ -53,6 +54,8 @@ public class Sketch extends PApplet {
      PImage imgRocket = loadImage("Pics/rocket.png");
       imgRocket.resize(40, 40);
       image(imgRocket, imgRocketX, imgRocketY);
+        
+  
     }
 
     else if(drawEnd1) {
@@ -61,6 +64,10 @@ public class Sketch extends PApplet {
 
     else if(drawEnd2) {
       drawEnd2();
+    }
+
+    else if(drawEnd3){
+      drawEnd3();
     }
 
  }
@@ -127,7 +134,7 @@ public class Sketch extends PApplet {
       {1, 0, 1, 0, 0, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 1, 0, 1, 1},
       {1, 0, 1, 0, 0, 1, 0, 1, 4, 1, 1, 1, 1, 4, 1, 0, 1, 0, 1, 1},
       {1, 0, 1, 1, 1, 1, 0, 1, 6, 1, 6, 6, 1, 6, 1, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 1, 4, 1, 0, 0, 0, 3, 1},
+      {1, 0, 0, 0, 0, 0, 0, 1, 4, 1, 4, 4, 1, 4, 1, 0, 0, 3, 0, 1},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     };
    
@@ -169,8 +176,9 @@ public class Sketch extends PApplet {
 
     
     int speed = 40;
-    //int stepCount = 0;
-     // circle moves accordingly to what arrow directions user presses
+    
+   
+    // circle moves accordingly to what arrow directions user presses
     if (keyPressed) {
       
       if (keyCode == UP) {
@@ -192,6 +200,9 @@ public class Sketch extends PApplet {
       }
        
       else if (keyCode == DOWN) {
+
+  
+
         if(imgRocketY > 320){
            speed = 0;
         }
@@ -203,47 +214,59 @@ public class Sketch extends PApplet {
       } 
 
       else if(keyCode == LEFT){
-          if(imgRocketX < 80){
-            speed = 0;
+       
+
+       if(imgRocketX < 80){
+         speed = 0;
+        }
+        else if(imgRocketX == 240){
+          speed = 0;
+        }
+        else if(imgRocketX == 600){
+          speed = 0;
+        }
+
+        else{
+          imgRocketX -= speed;
+        }
+      }
+
+      else if(keyCode == RIGHT){
+    
+        if(imgRocketX > 660){
+          speed = 0;
+          if (imgRocketY == 360 || imgRocketY == 320){
+            speed = 40;
+            imgRocketX += speed;
           }
-          else if(imgRocketX == 240){
-            speed = 0;
+        }
+        else if(imgRocketX == 40){
+          speed = 0;
+          if (imgRocketY == 360){
+            speed = 40;
+            imgRocketX += speed;
           }
-          else if(imgRocketX == 600){
-            speed = 0;
-          }
-          else{
-            imgRocketX -= speed;
+        }
+        else if(imgRocketX == 240){
+          speed = 0;
+         imgRocketX += speed;
+         if (imgRocketY == 40){
+            speed = 40;
+            imgRocketX += speed;
           }
         }
 
-        else if(keyCode == RIGHT){
-          if(imgRocketX > 660){
-            speed = 0;
-            if (imgRocketY == 360 || imgRocketY == 320){
-              speed = 40;
-              imgRocketX += speed;
-            }
-          }
-          else if(imgRocketX == 40){
-            speed = 0;
-            if (imgRocketY == 360){
-              speed = 40;
-              imgRocketX += speed;
-            }
-          }
-          else if(imgRocketX == 240){
-            speed = 0;
-            imgRocketX += speed;
-            if (imgRocketY == 40){
-              speed = 40;
-              imgRocketX += speed;
-            }
-          }
-          else{
-            imgRocketX += speed; 
-          }
+        else{
+          imgRocketX += speed; 
         }
+      }
+
+      if(imgRocketY == 80 && imgRocketX > 240 && imgRocketX < 460) {
+        drawMap = false;
+        drawEnd3 = true; 
+      }
+
+     
     } 
   }
  
@@ -262,7 +285,7 @@ public class Sketch extends PApplet {
       fill(237, 234, 69);
       textSize(15);
       text("<(Use arrows keys to navigate the spaceship. Collect all of the fuel to go back to Earth)", 45, 460);
-      text("**Hurry! you only have 60sec!!", 45, 474);
+      text("**Hurry! you only have 40sec!!", 45, 474);
     }
 
     if (nowSecond > 30 && nowSecond < 35){
@@ -295,7 +318,7 @@ public class Sketch extends PApplet {
     background(145, 41, 20);
     fill(242, 238, 237);
     textSize(40);
-    text("You are trapped in space and died suffocation.", 20, 80);
+    text("You are trapped in space and died of suffocation.", 0, 80);
 
     PImage xFace = loadImage("Pics/melt.png");
     xFace.resize(200, 200);
@@ -349,5 +372,28 @@ public class Sketch extends PApplet {
     }
   }
 
- 
+ public void drawEnd3 () {
+  
+  //bad end
+  background(145, 41, 20);
+  fill(242, 238, 237);
+  textSize(40);
+  text("You are crushed by an incoming meteor.", 20, 80);
+
+  PImage Meteor = loadImage("Pics/comet.png");
+  Meteor.resize(200, 200);
+  image(Meteor, 300, 150);
+
+  fill(242, 238, 237);
+  textSize(30);
+  text("'Press r to go back to the main menu'", 160, 420);
+
+  //return to menu screen
+  if(keyPressed){
+    if(key == 'r'){
+      drawMenu = true;
+      drawEnd1 = false;
+    }
+  }
+ } 
 }

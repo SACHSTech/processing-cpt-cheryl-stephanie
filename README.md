@@ -11,6 +11,6 @@ After 40 seconds, and the failure to collect all stars, you will be trapped in s
 
 Depending on the ending you might need to press keys or click your mouse to return to the menu scree.
 
-# Some things to look out in the prgram
+# Some things to look out in the program
 
 As soon as you load the program, immediately start playing. If you do not, the timer will continue even if you are not playing the game. Reloading the game is highly recommoned
