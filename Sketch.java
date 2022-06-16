@@ -123,7 +123,19 @@ public class Sketch extends PApplet {
     else if(drawEnd3){
       drawEnd3();
     }
- }
+  }
+
+  /**
+   * Draws the what screen needs to be shown
+   * 
+   * @param imgRocket image of rocket
+   * @param imgRocketX x-coordinate of the rocket
+   * @param imgRocketY y-coordinate of the rocket
+   * @param drawEnd1 boolean of ending screen 1 (bad ending)
+   * @param drawEnd2 boolean of ending screen 2 (happy ending)
+   * @param drawEnd3 boolean of ending screen 3 (sad ending)
+   */
+
 
   public void drawMenu(){
 
@@ -144,6 +156,13 @@ public class Sketch extends PApplet {
      drawMenu = false;
     } 
   }
+
+  /**
+   * Draws the menu screen
+   * 
+   * @param drawMap boolean of map drawn
+   * @param drawMenu boolean of menu drawn
+   */
 
   public void drawMap() {
 
@@ -200,6 +219,12 @@ public class Sketch extends PApplet {
       }
     }
   } 
+
+  /**
+   * Draws the game map
+   * 
+   * @param cellSize size of each 2-D arrays cell
+   */
 
   public void keyPressed() {
 
@@ -295,6 +320,14 @@ public class Sketch extends PApplet {
       }
     } 
   }
+
+  /**
+   * User input for rocket
+   * 
+   * @param speed integer of value moved
+   * @param imgRocketX x-coordinate of the rocket
+   * @param imgRocketY y-coordinate of the rocket
+   */
  
   private final long createdMillis = System.currentTimeMillis();
   public void Timer() {
@@ -383,7 +416,7 @@ public class Sketch extends PApplet {
     fill(235, 228, 40);
     ellipse(50, 60, 80, 80);
 
-    //return to menu screen
+    // return to menu screen
     if(mousePressed){
 
       drawMenu = true;
@@ -397,7 +430,7 @@ public class Sketch extends PApplet {
 
  public void drawEnd3 () {
   
-  //bad end
+  // bad end
   background(145, 41, 20);
   fill(242, 238, 237);
   textSize(40);
@@ -409,7 +442,7 @@ public class Sketch extends PApplet {
   textSize(30);
   text("'Press r to go back to the main menu'", 160, 420);
 
-  //return to menu screen
+  // return to menu screen
   if(keyPressed){
     if(key == 'r'){
       drawMenu = true;
