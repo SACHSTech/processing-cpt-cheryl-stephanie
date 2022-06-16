@@ -41,8 +41,8 @@ public class Sketch extends PApplet {
   }
 
   public void setup() {
-    drawEnd2 = true;
-    //drawMenu = true;
+   
+    drawMenu = true;
     background(13, 37, 145);
 
     // load images for Menu Screen
