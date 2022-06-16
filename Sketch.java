@@ -3,6 +3,15 @@ import processing.core.PImage;
 
 
 public class Sketch extends PApplet {
+
+  //images
+  PImage starsGround;
+  PImage Earth;
+  PImage Sat;
+  PImage Rocket;
+  PImage mapBackground;
+  PImage astroP;
+  PImage imgRocket;
 	
 	//variables for the playing screen 
   int cellSize = 40;
@@ -35,6 +44,30 @@ public class Sketch extends PApplet {
     drawEnd2 = true;
     //drawMenu = true;
     background(13, 37, 145);
+
+    // load images for Menu Screen
+    starsGround = loadImage("Pics/BackgroundStars.jpg");
+    starsGround.resize(800, 480); 
+
+    Earth = loadImage("Pics/BigEarth.png");
+    Earth.resize(600, 600);
+
+    Sat = loadImage("Pics/satellite.png");
+    Sat.resize(50,50);
+
+    Rocket = loadImage("Pics/rocket.png");
+    Rocket.resize(200,200);
+
+
+    // load images for Map
+    mapBackground = loadImage("Pics/BackgroundStars.jpg");
+    mapBackground.resize(800, 435); 
+
+    astroP = loadImage("Pics/astronaut.png");
+    astroP.resize(40, 40);
+
+    imgRocket = loadImage("Pics/rocket.png");
+    imgRocket.resize(40, 40); 
    
   }
 
@@ -72,24 +105,15 @@ public class Sketch extends PApplet {
 
  }
 
-
   public void drawMenu(){
 
     //menu screen
-    PImage starsGround = loadImage("Pics/BackgroundStars.jpg");
-    starsGround.resize(800, 480); 
     image(starsGround, 0, 0);
-
-    PImage Earth = loadImage("Pics/BigEarth.png");
-    Earth.resize(600, 600);
+    
     image(Earth, 400, 300);
-
-    PImage Sat = loadImage("Pics/satellite.png");
-    Sat.resize(50,50);
+    
     image(Sat, 600, 200);
 
-    PImage Rocket = loadImage("Pics/rocket.png");
-    Rocket.resize(200,200);
     image(Rocket, 60, 130);
 
     fill(247, 249, 252);
@@ -108,17 +132,10 @@ public class Sketch extends PApplet {
 
     //playing level screen
     background(13, 37, 145);
-    PImage mapBackground = loadImage("Pics/BackgroundStars.jpg");
-    mapBackground.resize(800, 435); 
-    image(mapBackground, 0, 0);
-
-    PImage astroP = loadImage("Pics/astronaut.png");
-    astroP.resize(40, 40);
-    image(astroP, 0, 440);
-
-    PImage imgRocket = loadImage("Pics/rocket.png");
-    imgRocket.resize(40, 40); 
     
+    image(mapBackground, 0, 0);
+    
+    image(astroP, 0, 440);
 
     int levelData [] [] = {
       //moonBlock = 1
@@ -369,6 +386,10 @@ public class Sketch extends PApplet {
 
       drawMenu = true;
       drawEnd2 = false;
+    }
+
+    if (imgRocketX == 700 && imgRocketY == 320){
+      drawEnd2 = true;
     }
   }
 
